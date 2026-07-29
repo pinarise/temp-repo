@@ -36,7 +36,7 @@ export const Route = createFileRoute("/articles")({
 
 function ArticlesListPage() {
   const searchParams = Route.useSearch();
-  const navigate = useNavigate();
+  const navigate = Route.useNavigate();
   
   const page = searchParams.page ?? 1;
   const search = searchParams.search ?? "";
