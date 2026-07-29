@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import type { ReactionType } from "@/types/reaction";
 
-export const Route = createFileRoute("/articles/$id")({
+export const Route = createFileRoute("/articles/$slug")({
   head: ({ loaderData }) => {
     return {
       meta: [
@@ -28,13 +28,13 @@ export const Route = createFileRoute("/articles/$id")({
 });
 
 function ArticleDetailPage() {
-  const { id } = Route.useParams();
+  const { slug } = Route.useParams();
   const router = useRouter();
   const { user } = useAuthStore();
   const isAuthenticated = !!user;
 
   // 1. Fetch Article details
-  const { data: article, isLoading: isArticleLoading, error: articleError, refetch: refetchArticle } = useArticleDetail(id);
+  const { data: article, isLoading: isArticleLoading, error: articleError, refetch: refetchArticle } = useArticleDetail(slug);
 
   // 2. Fetch Reactions (only enabled if article is successfully loaded)
   const { data: reactions, isLoading: isReactionsLoading } = useArticleReactions(article?.id || "");
@@ -349,8 +349,8 @@ function ArticleDetailPage() {
                       </div>
                       <div className="flex-1 min-w-0">
                         <Link
-                          to="/articles/$id"
-                          params={{ id: item.slug || item.id }}
+                          to="/articles/$slug"
+                          params={{ slug: item.slug || item.id }}
                           className="text-xs font-semibold text-foreground leading-snug line-clamp-2 hover:text-brand transition"
                         >
                           {item.title}
