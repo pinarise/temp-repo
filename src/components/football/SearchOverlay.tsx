@@ -61,8 +61,8 @@ export function SearchOverlay({ onClose }: { onClose: () => void }) {
                     {articles.map((article) => (
                       <Link
                         key={article.id}
-                        to="/articles/$id"
-                        params={{ id: article.slug }}
+                        to="/articles/$slug"
+                        params={{ slug: article.slug }}
                         onClick={onClose}
                         className="flex gap-4 py-3 hover:bg-muted/50 rounded-lg px-2 transition-colors group"
                       >

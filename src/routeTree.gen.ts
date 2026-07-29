@@ -30,7 +30,7 @@ import { Route as AccountSettingsRouteImport } from './routes/account-settings'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MatchIdRouteImport } from './routes/match.$id'
 import { Route as CompetitionsSlugRouteImport } from './routes/competitions.$slug'
-import { Route as ArticlesIdRouteImport } from './routes/articles.$id'
+import { Route as ArticlesSlugRouteImport } from './routes/articles.$slug'
 
 const VerifyEmailSentRoute = VerifyEmailSentRouteImport.update({
   id: '/verify-email-sent',
@@ -137,9 +137,9 @@ const CompetitionsSlugRoute = CompetitionsSlugRouteImport.update({
   path: '/competitions/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArticlesIdRoute = ArticlesIdRouteImport.update({
-  id: '/$id',
-  path: '/$id',
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
   getParentRoute: () => ArticlesRoute,
 } as any)
 
@@ -163,7 +163,7 @@ export interface FileRoutesByFullPath {
   '/verify-email': typeof VerifyEmailRoute
   '/verify-email-change': typeof VerifyEmailChangeRoute
   '/verify-email-sent': typeof VerifyEmailSentRoute
-  '/articles/$id': typeof ArticlesIdRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/competitions/$slug': typeof CompetitionsSlugRoute
   '/match/$id': typeof MatchIdRoute
 }
@@ -187,7 +187,7 @@ export interface FileRoutesByTo {
   '/verify-email': typeof VerifyEmailRoute
   '/verify-email-change': typeof VerifyEmailChangeRoute
   '/verify-email-sent': typeof VerifyEmailSentRoute
-  '/articles/$id': typeof ArticlesIdRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/competitions/$slug': typeof CompetitionsSlugRoute
   '/match/$id': typeof MatchIdRoute
 }
@@ -212,7 +212,7 @@ export interface FileRoutesById {
   '/verify-email': typeof VerifyEmailRoute
   '/verify-email-change': typeof VerifyEmailChangeRoute
   '/verify-email-sent': typeof VerifyEmailSentRoute
-  '/articles/$id': typeof ArticlesIdRoute
+  '/articles/$slug': typeof ArticlesSlugRoute
   '/competitions/$slug': typeof CompetitionsSlugRoute
   '/match/$id': typeof MatchIdRoute
 }
@@ -238,7 +238,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/verify-email-change'
     | '/verify-email-sent'
-    | '/articles/$id'
+    | '/articles/$slug'
     | '/competitions/$slug'
     | '/match/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -262,7 +262,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/verify-email-change'
     | '/verify-email-sent'
-    | '/articles/$id'
+    | '/articles/$slug'
     | '/competitions/$slug'
     | '/match/$id'
   id:
@@ -286,7 +286,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/verify-email-change'
     | '/verify-email-sent'
-    | '/articles/$id'
+    | '/articles/$slug'
     | '/competitions/$slug'
     | '/match/$id'
   fileRoutesById: FileRoutesById
@@ -464,22 +464,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompetitionsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/articles/$id': {
-      id: '/articles/$id'
-      path: '/$id'
-      fullPath: '/articles/$id'
-      preLoaderRoute: typeof ArticlesIdRouteImport
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
       parentRoute: typeof ArticlesRoute
     }
   }
 }
 
 interface ArticlesRouteChildren {
-  ArticlesIdRoute: typeof ArticlesIdRoute
+  ArticlesSlugRoute: typeof ArticlesSlugRoute
 }
 
 const ArticlesRouteChildren: ArticlesRouteChildren = {
-  ArticlesIdRoute: ArticlesIdRoute,
+  ArticlesSlugRoute: ArticlesSlugRoute,
 }
 
 const ArticlesRouteWithChildren = ArticlesRoute._addFileChildren(

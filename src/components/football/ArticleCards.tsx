@@ -31,7 +31,7 @@ export function HeroPollCard({ image, title, id, slug }: { image: string; title:
 
   if (id || slug) {
     return (
-      <Link to="/articles/$id" params={{ id: slug || String(id) }} className="block">
+      <Link to="/articles/$slug" params={{ slug: slug || String(id) }} className="block">
         {cardContent}
       </Link>
     );
@@ -41,11 +41,11 @@ export function HeroPollCard({ image, title, id, slug }: { image: string; title:
 }
 
 export function GridCard({ id, slug, image, title, date }: ArticleCardProps) {
-  const linkId = slug || String(id);
+  const linkSlug = slug || String(id);
   return (
     <Link
-      to="/articles/$id"
-      params={{ id: linkId }}
+      to="/articles/$slug"
+      params={{ slug: linkSlug }}
       className="block bg-white rounded-lg overflow-hidden shadow-sm border hover:shadow-md hover:-translate-y-0.5 transition"
     >
       <div className="aspect-[16/10] overflow-hidden">
@@ -60,11 +60,11 @@ export function GridCard({ id, slug, image, title, date }: ArticleCardProps) {
 }
 
 export function ListCard({ id, slug, image, title, date }: ArticleCardProps) {
-  const linkId = slug || String(id);
+  const linkSlug = slug || String(id);
   return (
     <Link
-      to="/articles/$id"
-      params={{ id: linkId }}
+      to="/articles/$slug"
+      params={{ slug: linkSlug }}
       className="flex bg-white rounded-lg overflow-hidden shadow-sm border hover:shadow-md transition"
     >
       <div className="w-28 h-20 shrink-0">
@@ -79,11 +79,11 @@ export function ListCard({ id, slug, image, title, date }: ArticleCardProps) {
 }
 
 export function ReadMoreCard({ id, slug, image, title }: ArticleCardProps) {
-  const linkId = slug || String(id);
+  const linkSlug = slug || String(id);
   return (
     <Link
-      to="/articles/$id"
-      params={{ id: linkId }}
+      to="/articles/$slug"
+      params={{ slug: linkSlug }}
       className="flex bg-white rounded-lg overflow-hidden shadow-sm border hover:shadow-md transition"
     >
       <div className="w-28 h-20 shrink-0">
