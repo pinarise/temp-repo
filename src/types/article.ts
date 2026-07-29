@@ -85,6 +85,7 @@ export interface ListArticlesParams {
   search?: string;
   per_page?: number;
   page?: number;
+  [key: string]: string | number | boolean | undefined | null;
 }
 
 export interface CreateArticlePayload {

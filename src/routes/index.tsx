@@ -25,7 +25,6 @@ import {
   videos,
 } from "@/constants/data";
 import { useArticles } from "@/hooks/articles/use-articles";
-import { useCategories } from "@/hooks/articles/use-categories";
 import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -52,25 +51,27 @@ function HomePage() {
     per_page: 100,
     page: 1,
   });
-  const { data: categoriesData, isLoading: categoriesLoading } =
-    useCategories();
 
   // Group articles by category
   const articlesByCategory = useMemo(() => {
-    if (!articlesData?.data || !categoriesData) return {};
+    if (!articlesData?.data) return {};
 
     const grouped: Record<string, typeof articlesData.data> = {};
 
-    categoriesData.forEach((category) => {
-      grouped[category.name] = articlesData.data.filter(
-        (article) => article.category_id === category.id
-      );
+    articlesData.data.forEach((article) => {
+      if (article.category) {
+        const categoryName = article.category.name;
+        if (!grouped[categoryName]) {
+          grouped[categoryName] = [];
+        }
+        grouped[categoryName].push(article);
+      }
     });
 
     return grouped;
-  }, [articlesData, categoriesData]);
+  }, [articlesData]);
 
-  const isLoading = articlesLoading || categoriesLoading;
+  const isLoading = articlesLoading;
 
   return (
     <div className="min-h-screen bg-background">
@@ -149,7 +150,7 @@ function HomePage() {
                       <GridCard
                         key={article.id}
                         id={article.id}
-                        image={article.featured_image_url || IMG.player1}
+                        image={article.featured_media || IMG.player1}
                         title={article.title}
                         date={article.published_at}
                       />
@@ -160,7 +161,7 @@ function HomePage() {
                       <ReadMoreCard
                         key={article.id}
                         id={article.id}
-                        image={article.featured_image_url || IMG.player1}
+                        image={article.featured_media || IMG.player1}
                         title={article.title}
                       />
                     ))}
