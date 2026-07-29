@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useMemo } from "react";
 import { Navbar } from "@/components/football/Navbar";
 import {
   MobileTopTabs,
@@ -23,6 +24,9 @@ import {
   fixtures,
   videos,
 } from "@/constants/data";
+import { useArticles } from "@/hooks/articles/use-articles";
+import { useCategories } from "@/hooks/articles/use-categories";
+import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,6 +48,30 @@ export const Route = createFileRoute("/")({
 });
 
 function HomePage() {
+  const { data: articlesData, isLoading: articlesLoading } = useArticles({
+    per_page: 100,
+    page: 1,
+  });
+  const { data: categoriesData, isLoading: categoriesLoading } =
+    useCategories();
+
+  // Group articles by category
+  const articlesByCategory = useMemo(() => {
+    if (!articlesData?.data || !categoriesData) return {};
+
+    const grouped: Record<string, typeof articlesData.data> = {};
+
+    categoriesData.forEach((category) => {
+      grouped[category.name] = articlesData.data.filter(
+        (article) => article.category_id === category.id
+      );
+    });
+
+    return grouped;
+  }, [articlesData, categoriesData]);
+
+  const isLoading = articlesLoading || categoriesLoading;
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -105,60 +133,54 @@ function HomePage() {
           </div>
         </section>
 
-        {/* Transfers (mobile) */}
-        <section className="lg:hidden">
-          <SectionHeader title="Transfers" />
-          <div className="space-y-3">
-            {trending.map((a) => (
-              <ListCard key={`t-${a.id}`} {...a} />
-            ))}
-          </div>
-        </section>
-
-        {/* Super Eagles */}
-        <section>
-          <SectionHeader title="Super Eagles" />
-          <div className="hidden lg:grid grid-cols-4 gap-4">
-            {superEagles.map((a) => (
-              <GridCard key={a.id} {...a} date="" />
-            ))}
-          </div>
-          <div className="lg:hidden space-y-3">
-            {superEagles.map((a) => (
-              <ReadMoreCard key={a.id} {...a} />
-            ))}
-          </div>
-        </section>
-
-        {/* NPFL */}
-        <section>
-          <SectionHeader title="Nigeria Premier League" />
-          <div className="hidden lg:grid grid-cols-4 gap-4">
-            {npfl.map((a) => (
-              <GridCard key={a.id} {...a} date="" />
-            ))}
-          </div>
-          <div className="lg:hidden space-y-3">
-            {npfl.map((a) => (
-              <ReadMoreCard key={a.id} {...a} />
-            ))}
-          </div>
-        </section>
+        {/* Dynamic Articles by Category */}
+        {isLoading ? (
+          <section className="flex justify-center items-center py-12">
+            <Loader2 className="w-6 h-6 animate-spin text-brand" />
+          </section>
+        ) : (
+          Object.entries(articlesByCategory).map(
+            ([categoryName, articles]) =>
+              articles.length > 0 && (
+                <section key={categoryName}>
+                  <SectionHeader title={categoryName} />
+                  <div className="hidden lg:grid grid-cols-4 gap-4">
+                    {articles.slice(0, 4).map((article) => (
+                      <GridCard
+                        key={article.id}
+                        id={article.id}
+                        image={article.featured_image_url || IMG.player1}
+                        title={article.title}
+                        date={article.published_at}
+                      />
+                    ))}
+                  </div>
+                  <div className="lg:hidden space-y-3">
+                    {articles.slice(0, 3).map((article) => (
+                      <ReadMoreCard
+                        key={article.id}
+                        id={article.id}
+                        image={article.featured_image_url || IMG.player1}
+                        title={article.title}
+                      />
+                    ))}
+                  </div>
+                  {articles.length > 4 && (
+                    <div className="hidden lg:flex justify-end mt-3">
+                      <button className="border border-brand text-brand text-xs font-semibold px-3 py-1.5 rounded hover:bg-brand hover:text-brand-foreground transition">
+                        More {categoryName}
+                      </button>
+                    </div>
+                  )}
+                </section>
+              )
+          )
+        )}
 
         {/* Scores & Fixtures */}
         <section>
           <SectionHeader title="Scores & Fixtures" />
           <MatchWidget fixtures={fixtures} />
-        </section>
-
-        {/* Featured Analysis (desktop) */}
-        <section className="hidden lg:block">
-          <SectionHeader title="Featured Analysis" />
-          <div className="grid grid-cols-4 gap-4">
-            {npfl.map((a) => (
-              <ReadMoreCard key={`fa-${a.id}`} {...a} />
-            ))}
-          </div>
         </section>
 
         {/* Videos */}
