@@ -22,18 +22,21 @@ export const IMG = {
 export const trending = [
   {
     id: 1,
+    slug: "super-eagles-win-afcon-qualifier-1",
     image: IMG.player1,
     title: "Super Eagles Win AFCON Qualifier",
     date: "21 Jun 2025",
   },
   {
     id: 2,
+    slug: "super-eagles-win-afcon-qualifier-2",
     image: IMG.fan1,
     title: "Super Eagles Win AFCON Qualifier",
     date: "21 Jun 2025",
   },
   {
     id: 3,
+    slug: "super-eagles-win-afcon-qualifier-3",
     image: IMG.team,
     title: "Super Eagles Win AFCON Qualifier",
     date: "21 Jun 2025",
@@ -43,30 +46,35 @@ export const trending = [
 export const latestNews = [
   {
     id: 1,
+    slug: "super-eagles-win-afcon-qualifier-latest-1",
     image: IMG.action,
     title: "Super Eagles Win AFCON Qualifier",
     date: "26 Jun 2025 12:00:00",
   },
   {
     id: 2,
+    slug: "super-eagles-win-afcon-qualifier-latest-2",
     image: IMG.celebrate,
     title: "Super Eagles Win AFCON Qualifier",
     date: "26 Jun 2025",
   },
   {
     id: 3,
+    slug: "super-eagles-win-afcon-qualifier-latest-3",
     image: IMG.flag,
     title: "Super Eagles Win AFCON Qualifier",
     date: "26 Jun 2025",
   },
   {
     id: 4,
+    slug: "super-eagles-win-afcon-qualifier-latest-4",
     image: IMG.flag,
     title: "Super Eagles Win AFCON Qualifier",
     date: "26 Jun 2025",
   },
   {
     id: 5,
+    slug: "super-eagles-win-afcon-qualifier-latest-5",
     image: IMG.flag,
     title: "Super Eagles Win AFCON Qualifier",
     date: "26 Jun 2025",
@@ -74,33 +82,37 @@ export const latestNews = [
 ];
 
 export const superEagles = [
-  { id: 1, image: IMG.player1, title: "Super Eagles Win AFCON Qualifier" },
-  { id: 2, image: IMG.goal, title: "Super Eagles Win AFCON Qualifier" },
-  { id: 3, image: IMG.celebrate, title: "Super Eagles Win AFCON Qualifier" },
-  { id: 4, image: IMG.action, title: "Super Eagles Win AFCON Qualifier" },
+  { id: 1, slug: "super-eagles-win-afcon-qualifier-eagles-1", image: IMG.player1, title: "Super Eagles Win AFCON Qualifier" },
+  { id: 2, slug: "super-eagles-win-afcon-qualifier-eagles-2", image: IMG.goal, title: "Super Eagles Win AFCON Qualifier" },
+  { id: 3, slug: "super-eagles-win-afcon-qualifier-eagles-3", image: IMG.celebrate, title: "Super Eagles Win AFCON Qualifier" },
+  { id: 4, slug: "super-eagles-win-afcon-qualifier-eagles-4", image: IMG.action, title: "Super Eagles Win AFCON Qualifier" },
 ];
 
 export const npfl = [
   {
     id: 1,
+    slug: "world-cup-qualifier-eric-chelle-invites-eagles-legends-1",
     image: IMG.team,
     title:
       "World Cup Qualifier: Eric Chelle Invites Eagles Legends To Inspire Players",
   },
   {
     id: 2,
+    slug: "world-cup-qualifier-eric-chelle-invites-eagles-legends-2",
     image: IMG.action,
     title:
       "World Cup Qualifier: Eric Chelle Invites Eagles Legends To Inspire Players",
   },
   {
     id: 3,
+    slug: "world-cup-qualifier-eric-chelle-invites-eagles-legends-3",
     image: IMG.celebrate,
     title:
       "World Cup Qualifier: Eric Chelle Invites Eagles Legends To Inspire Players",
   },
   {
     id: 4,
+    slug: "world-cup-qualifier-eric-chelle-invites-eagles-legends-4",
     image: IMG.stadium,
     title:
       "World Cup Qualifier: Eric Chelle Invites Eagles Legends To Inspire Players",
@@ -141,18 +153,21 @@ export const fixtures = [
 export const videos = [
   {
     id: 1,
+    slug: "world-cup-qualifier-eric-chelle-invites-eagles-legends-video-1",
     image: IMG.team,
     title:
       "World Cup Qualifier: Eric Chelle Invites Eagles Legends To Inspire Players",
   },
   {
     id: 2,
+    slug: "world-cup-qualifier-eric-chelle-invites-eagles-legends-video-2",
     image: IMG.action,
     title:
       "World Cup Qualifier: Eric Chelle Invites Eagles Legends To Inspire Players",
   },
   {
     id: 3,
+    slug: "world-cup-qualifier-eric-chelle-invites-eagles-legends-video-3",
     image: IMG.celebrate,
     title:
       "World Cup Qualifier: Eric Chelle Invites Eagles Legends To Inspire Players",
