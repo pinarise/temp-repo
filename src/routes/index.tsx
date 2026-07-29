@@ -25,7 +25,8 @@ import {
   videos,
 } from "@/constants/data";
 import { useArticles } from "@/hooks/articles/use-articles";
-import { Loader2 } from "lucide-react";
+import { MultiSectionSkeleton } from "@/components/football/SkeletonLoaders";
+import { NoArticlesEmptyState } from "@/components/football/EmptyState";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -136,9 +137,9 @@ function HomePage() {
 
         {/* Dynamic Articles by Category */}
         {isLoading ? (
-          <section className="flex justify-center items-center py-12">
-            <Loader2 className="w-6 h-6 animate-spin text-brand" />
-          </section>
+          <MultiSectionSkeleton />
+        ) : Object.entries(articlesByCategory).length === 0 ? (
+          <NoArticlesEmptyState />
         ) : (
           Object.entries(articlesByCategory).map(
             ([categoryName, articles]) =>
