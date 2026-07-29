@@ -5,7 +5,7 @@ export type ArticleCardProps = {
   slug?: string;
   image?: string;
   title: string;
-  date?: string;
+  date?: string | null;
 };
 
 export function HeroPollCard({ image, title, id, slug }: { image: string; title: string; id?: string | number; slug?: string }) {
