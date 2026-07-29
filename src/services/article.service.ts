@@ -1,6 +1,5 @@
 import { ENDPOINTS } from "@/constants/endpoints";
 import { apiClient } from "@/lib/api-client";
-import { getMockArticle, getAllMockArticles } from "@/lib/mock-articles";
 import type {
   Article,
   Category,
@@ -17,41 +16,14 @@ import type {
 
 export const articleService = {
   // Articles
-  listArticles: async (params?: ListArticlesParams, signal?: AbortSignal) => {
-    try {
-      return await apiClient.get<LaravelPagination<Article>>(ENDPOINTS.articles.list, {
-        query: params as Record<string, string | number | boolean | undefined | null>,
-        signal,
-      });
-    } catch (error) {
-      console.log("[v0] listArticles API failed, falling back to mock data");
-      // Fallback to mock articles
-      const articles = getAllMockArticles();
-      return {
-        data: articles,
-        current_page: 1,
-        per_page: articles.length,
-        total: articles.length,
-        from: 1,
-        to: articles.length,
-        last_page: 1,
-      } as LaravelPagination<Article>;
-    }
-  },
+  listArticles: (params?: ListArticlesParams, signal?: AbortSignal) =>
+    apiClient.get<LaravelPagination<Article>>(ENDPOINTS.articles.list, {
+      query: params as Record<string, string | number | boolean | undefined | null>,
+      signal,
+    }),
 
-  getArticle: async (id: string, signal?: AbortSignal): Promise<Article> => {
-    try {
-      return await apiClient.get<Article>(ENDPOINTS.articles.get(id), { signal });
-    } catch (error) {
-      console.log("[v0] getArticle API failed for", id, ", falling back to mock data");
-      // Fallback to mock article by slug or id
-      const article = getMockArticle(id);
-      if (article) {
-        return article;
-      }
-      throw new Error(`Article not found: ${id}`);
-    }
-  },
+  getArticle: (id: string, signal?: AbortSignal) =>
+    apiClient.get<Article>(ENDPOINTS.articles.get(id), { signal }),
 
   createArticle: (payload: CreateArticlePayload) =>
     apiClient.post<Article>(ENDPOINTS.articles.create, payload),
