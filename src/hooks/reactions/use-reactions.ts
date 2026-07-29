@@ -162,3 +162,15 @@ export function useToggleCommentReaction(commentId: string) {
     },
   });
 }
+
+export function useDeleteReaction() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (reactionId: string) => reactionService.deleteReaction(reactionId),
+    onSuccess: () => {
+      // Invalidate all reactions queries to sync with backend
+      queryClient.invalidateQueries({ queryKey: queryKeys.reactions.all });
+    },
+  });
+}

@@ -132,3 +132,87 @@ export function useScheduleArticle() {
     },
   });
 }
+
+export function useCategory(id: string) {
+  return useQuery({
+    queryKey: queryKeys.articles.categories(),
+    queryFn: ({ signal }) => articleService.getCategory(id, signal),
+    enabled: !!id,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+export function useCreateCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: CreateArticlePayload) => articleService.createCategory(payload as any),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.articles.categories() });
+    },
+  });
+}
+
+export function useUpdateCategory(id: string) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: UpdateArticlePayload) => articleService.updateCategory(id, payload as any),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.articles.categories() });
+    },
+  });
+}
+
+export function useDeleteCategory() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: string) => articleService.deleteCategory(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.articles.categories() });
+    },
+  });
+}
+
+export function useTag(id: string) {
+  return useQuery({
+    queryKey: queryKeys.articles.tags({ id }),
+    queryFn: ({ signal }) => articleService.getTag(id, signal),
+    enabled: !!id,
+    staleTime: 5 * 60 * 1000,
+  });
+}
+
+export function useCreateTag() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: CreateArticlePayload) => articleService.createTag(payload as any),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.articles.tags() });
+    },
+  });
+}
+
+export function useUpdateTag(id: string) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (payload: UpdateArticlePayload) => articleService.updateTag(id, payload as any),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.articles.tags() });
+    },
+  });
+}
+
+export function useDeleteTag() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: string) => articleService.deleteTag(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.articles.tags() });
+    },
+  });
+}

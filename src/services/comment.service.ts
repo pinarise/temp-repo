@@ -10,7 +10,7 @@ import type {
 
 export const commentService = {
   listComments: (articleId: string, params?: { per_page?: number; page?: number }, signal?: AbortSignal) =>
-    apiClient.get<ListCommentsResponse>(ENDPOINTS.articles.comments(articleId), {
+    apiClient.get<ListCommentsResponse>(ENDPOINTS.comments.list(articleId), {
       query: params as Record<string, string | number | boolean | undefined | null>,
       signal,
     }),
@@ -19,7 +19,7 @@ export const commentService = {
     apiClient.get<CommentResource>(ENDPOINTS.comments.get(id), { signal }),
 
   createComment: (articleId: string, payload: CreateCommentPayload) =>
-    apiClient.post<CommentResource>(ENDPOINTS.articles.comments(articleId), payload),
+    apiClient.post<CommentResource>(ENDPOINTS.comments.create(articleId), payload),
 
   updateComment: (id: string, payload: UpdateCommentPayload) =>
     apiClient.put<CommentResource>(ENDPOINTS.comments.update(id), payload),

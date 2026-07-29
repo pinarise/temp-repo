@@ -30,10 +30,16 @@ export const ENDPOINTS = {
   categories: {
     list: "/v1/categories",
     get: (id: string) => `/v1/categories/${id}`,
+    create: "/v1/categories",
+    update: (id: string) => `/v1/categories/${id}`,
+    delete: (id: string) => `/v1/categories/${id}`,
   },
   tags: {
     list: "/v1/tags",
     get: (id: string) => `/v1/tags/${id}`,
+    create: "/v1/tags",
+    update: (id: string) => `/v1/tags/${id}`,
+    delete: (id: string) => `/v1/tags/${id}`,
   },
   articles: {
     list: "/v1/articles",
@@ -49,13 +55,19 @@ export const ENDPOINTS = {
     reactions: (id: string) => `/v1/articles/${id}/reactions`,
   },
   comments: {
+    list: (articleId: string) => `/v1/articles/${articleId}/comments`,
     get: (id: string) => `/v1/comments/${id}`,
+    create: (articleId: string) => `/v1/articles/${articleId}/comments`,
     update: (id: string) => `/v1/comments/${id}`,
     delete: (id: string) => `/v1/comments/${id}`,
     moderate: (id: string) => `/v1/comments/${id}/moderate`,
     reactions: (id: string) => `/v1/comments/${id}/reactions`,
   },
   reactions: {
+    articleReactions: (articleId: string) => `/v1/articles/${articleId}/reactions`,
+    toggleArticleReaction: (articleId: string) => `/v1/articles/${articleId}/reactions`,
+    commentReactions: (commentId: string) => `/v1/comments/${commentId}/reactions`,
+    toggleCommentReaction: (commentId: string) => `/v1/comments/${commentId}/reactions`,
     delete: (id: string) => `/v1/reactions/${id}`,
   },
 } as const;

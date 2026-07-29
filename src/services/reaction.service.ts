@@ -8,16 +8,16 @@ import type {
 
 export const reactionService = {
   listArticleReactions: (articleId: string, signal?: AbortSignal) =>
-    apiClient.get<ReactionSummary>(ENDPOINTS.articles.reactions(articleId), { signal }),
+    apiClient.get<ReactionSummary>(ENDPOINTS.reactions.articleReactions(articleId), { signal }),
 
   toggleArticleReaction: (articleId: string, payload: StoreReactionPayload) =>
-    apiClient.post<ReactionResource | null>(ENDPOINTS.articles.reactions(articleId), payload),
+    apiClient.post<ReactionResource | null>(ENDPOINTS.reactions.toggleArticleReaction(articleId), payload),
 
   listCommentReactions: (commentId: string, signal?: AbortSignal) =>
-    apiClient.get<ReactionSummary>(ENDPOINTS.comments.reactions(commentId), { signal }),
+    apiClient.get<ReactionSummary>(ENDPOINTS.reactions.commentReactions(commentId), { signal }),
 
   toggleCommentReaction: (commentId: string, payload: StoreReactionPayload) =>
-    apiClient.post<ReactionResource | null>(ENDPOINTS.comments.reactions(commentId), payload),
+    apiClient.post<ReactionResource | null>(ENDPOINTS.reactions.toggleCommentReaction(commentId), payload),
 
   deleteReaction: (reactionId: string) =>
     apiClient.delete<{ message: string }>(ENDPOINTS.reactions.delete(reactionId)),

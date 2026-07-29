@@ -103,3 +103,21 @@ export interface CreateArticlePayload {
 }
 
 export interface UpdateArticlePayload extends Partial<CreateArticlePayload> {}
+
+export interface CreateCategoryPayload {
+  parent_id?: string | null;
+  name: string;
+  slug?: string;
+  description?: string | null;
+  type?: ContentCategoryType;
+  is_active?: boolean;
+}
+
+export interface UpdateCategoryPayload extends Partial<CreateCategoryPayload> {}
+
+export interface CreateTagPayload {
+  name: string;
+  slug?: string;
+}
+
+export interface UpdateTagPayload extends Partial<CreateTagPayload> {}
